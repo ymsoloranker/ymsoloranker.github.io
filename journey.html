@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>the journey — ymsoloranker</title>
+<link rel="icon" type="image/jpeg" href="web-logo.jpg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500&display=swap');
+ 
+  :root{
+    --bg: #0a0a0a;
+    --border: #262626;
+    --text: #e8e8e8;
+    --text-dim: #7a7a7a;
+    --accent: #ff3b3b;
+  }
+ 
+  *{ margin:0; padding:0; box-sizing:border-box; }
+ 
+  body{
+    background:var(--bg) url('jourbg.jpg') center center / cover fixed no-repeat;
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+ 
+  body::after{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:rgba(8,8,10,0.86);
+    pointer-events:none;
+    z-index:0;
+  }
+ 
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index:1;
+  }
+ 
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:min(12vh,100px) 24px 100px;
+    position:relative;
+    z-index:2;
+  }
+ 
+  .back{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-dim);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:color .2s ease;
+  }
+  .back:hover{ color:var(--accent); }
+ 
+  .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    color:var(--text-dim);
+    margin:40px 0 20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .label::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+ 
+  h1{
+    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(2.2rem, 7vw, 3.4rem);
+    font-weight:800;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+    margin-top:14px;
+    position:relative;
+    display:inline-block;
+  }
+  h1 .char{ display:inline-block; transition:color .15s ease; }
+  h1:hover .char{ color:var(--accent); }
+  h1::after{
+    content:'';
+    position:absolute;
+    left:2px; right:2px; bottom:-6px;
+    height:2px;
+    background:var(--accent);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .4s cubic-bezier(.65,0,.35,1);
+  }
+  h1:hover::after{ transform:scaleX(1); }
+ 
+  .bio{
+    margin-top:44px;
+    font-size:17px;
+    line-height:1.85;
+    color:var(--text);
+  }
+  .bio p{ margin-bottom:22px; }
+  .bio p:last-of-type{ margin-bottom:0; }
+  .bio .emph{ color:var(--accent); font-weight:500; }
+ 
+  .sign{
+    margin-top:56px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-dim);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .sign .dash{ color:var(--accent); }
+  .sign .caret{
+    display:inline-block;
+    width:8px; height:14px;
+    background:var(--accent);
+    animation:blink 1.1s step-end infinite;
+  }
+  @keyframes blink{
+    0%,49%{ opacity:1; }
+    50%,100%{ opacity:0; }
+  }
+ 
+  footer{
+    margin-top:80px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:#4a4a4a;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:18px;
+    justify-content:space-between;
+    border-top:1px solid var(--border);
+    padding-top:20px;
+  }
+  footer a{ color:#4a4a4a; text-decoration:none; transition:color .2s ease; }
+  footer a:hover{ color:var(--accent); }
+</style>
+</head>
+<body>
+ 
+<div class="wrap">
+ 
+  <a class="back" href="index.html">&larr; back</a>
+ 
+  <div class="label">the journey</div>
+ 
+  <h1 id="nameEl">HOW I GOT HERE</h1>
+ 
+  <div class="bio">
+    <p>I didn't start with a plan. I started broke, tired of subscription pages I couldn't afford, and done wasting time.</p>
+    <p>First I tried trading — no capital, just a demo account and a lot of screen time. Then dropshipping, which I dropped fast. Neither stuck, but both taught me what I didn't want to build my life around.</p>
+    <p>Freelancing is what actually paid. Logo design, small gigs, real money coming in from work I actually did myself.</p>
+    <p>Then I found <span class="emph">building</span>. AI-assisted at first, then real fundamentals underneath it. Every project since has been about owning the whole stack — running local, depending on nobody's cloud but my own machine.</p>
+    <p>Still early. Still solo. Still building.</p>
+  </div>
+ 
+  <div class="sign"><span class="dash">—</span> ymsoloranker <span class="caret"></span></div>
+ 
+  <footer>
+    <span>Dhaka, BD</span>
+    <div style="display:flex; gap:18px;">
+      <a href="about.html">my story</a>
+      <a href="index.html">index</a>
+    </div>
+  </footer>
+ 
+</div>
+ 
+<script>
+  const nameEl = document.getElementById('nameEl');
+  const raw = "HOW I GOT HERE";
+  nameEl.innerHTML = raw.split('').map(c => c === ' ' ? ' ' : `<span class="char">${c}</span>`).join('');
+</script>
+ 
+</body>
+</html>
