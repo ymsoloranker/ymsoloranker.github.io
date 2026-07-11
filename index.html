@@ -12,10 +12,10 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            padding: 80px 20px;
             text-align: center;
+            min-height: 100vh;
         }
         h1 {
             font-size: 4rem;
@@ -23,21 +23,54 @@
             font-weight: 700;
             margin-bottom: 10px;
         }
-        p {
+        .tagline {
             font-size: 1.2rem;
             color: #a0a0a0;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
-        a {
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        .project-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 250px;
+            text-align: left;
+        }
+        .project-card h3 {
+            color: #ff6b6b;
+            margin-bottom: 5px;
+        }
+        .project-card p {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+        .links a {
             color: #ff6b6b;
             text-decoration: none;
+            margin: 0 10px;
             border: 1px solid #ff6b6b;
-            padding: 10px 25px;
+            padding: 8px 16px;
             border-radius: 5px;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
-        a:hover {
+        .links a:hover {
             background-color: #ff6b6b;
             color: #0d0d0d;
         }
@@ -45,7 +78,29 @@
 </head>
 <body>
     <h1>YMSOLORANKER</h1>
-    <p>Building OpenBase, Solo IDE, and the future.</p>
-    <a href="https://github.com/ymsoloranker">View GitHub</a>
+    <p class="tagline">Building local AI tools, open-source systems, and the future.</p>
+
+    <div class="section-title">Projects</div>
+    <div class="projects">
+        <div class="project-card">
+            <h3>OpenBase</h3>
+            <p>A local, open-source alternative to Notion.</p>
+        </div>
+        <div class="project-card">
+            <h3>Solo IDE</h3>
+            <p>An AI-powered local development environment.</p>
+        </div>
+        <div class="project-card">
+            <h3>Claude-Toolkit</h3>
+            <p>Custom skills and prompts for AI agents.</p>
+        </div>
+    </div>
+
+    <div class="section-title">Connect</div>
+    <div class="links">
+        <a href="https://github.com/ymsoloranker">GitHub</a>
+        <a href="https://www.instagram.com/ymsoloranker">Instagram</a>
+        <a href="#">Contra</a>
+    </div>
 </body>
 </html>
