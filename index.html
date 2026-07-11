@@ -22,12 +22,22 @@
   html{ scroll-behavior:smooth; }
  
   body{
-    background:var(--bg);
+    background:var(--bg) url('bg.jpg') center center / cover fixed no-repeat;
     color:var(--text);
     font-family:'Inter', sans-serif;
     min-height:100vh;
     overflow-x:hidden;
     position:relative;
+  }
+ 
+  /* dark overlay so text stays readable over the wallpaper */
+  body::after{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:rgba(10,10,10,0.82);
+    pointer-events:none;
+    z-index:0;
   }
  
   /* faint scanline texture over everything, terminal feel */
@@ -51,7 +61,7 @@
     margin:0 auto;
     padding:min(14vh,120px) 24px 80px;
     position:relative;
-    z-index:1;
+    z-index:2;
   }
  
   /* --- prompt line above name --- */
@@ -345,3 +355,4 @@
  
 </body>
 </html>
+ 
