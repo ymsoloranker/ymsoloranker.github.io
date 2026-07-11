@@ -264,9 +264,17 @@
     font-size:11px;
     color:#4a4a4a;
     display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:18px;
     justify-content:space-between;
     border-top:1px solid var(--border);
     padding-top:20px;
+  }
+ 
+  footer .footer-links{
+    display:flex;
+    gap:18px;
   }
  
   #clock{ color:var(--text-dim); }
@@ -309,7 +317,10 @@
  
   <footer>
     <span>Dhaka, BD</span>
-    <span id="clock">--:--</span>
+    <div class="footer-links">
+      <a href="about.html" style="color:var(--text-dim); text-decoration:none;">my story</a>
+      <span id="clock">--:--</span>
+    </div>
   </footer>
  
 </div>
