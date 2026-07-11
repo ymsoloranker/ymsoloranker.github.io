@@ -1,106 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ymsoloranker</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background-color: #0d0d0d;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 80px 20px;
-            text-align: center;
-            min-height: 100vh;
-        }
-        h1 {
-            font-size: 4rem;
-            letter-spacing: 2px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .tagline {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            margin-bottom: 40px;
-        }
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-            width: 100%;
-            max-width: 600px;
-        }
-        .projects {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-        .project-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 250px;
-            text-align: left;
-        }
-        .project-card h3 {
-            color: #ff6b6b;
-            margin-bottom: 5px;
-        }
-        .project-card p {
-            color: #a0a0a0;
-            font-size: 0.9rem;
-        }
-        .links a {
-            color: #ff6b6b;
-            text-decoration: none;
-            margin: 0 10px;
-            border: 1px solid #ff6b6b;
-            padding: 8px 16px;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .links a:hover {
-            background-color: #ff6b6b;
-            color: #0d0d0d;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ymsoloranker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500&display=swap');
+
+  :root{
+    --bg: #0a0a0a;
+    --bg-raised: #111111;
+    --border: #262626;
+    --text: #e8e8e8;
+    --text-dim: #7a7a7a;
+    --accent: #ff3b3b;
+    --accent-dim: #7a1f1f;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* faint scanline texture over everything, terminal feel */
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index:2;
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:min(14vh,120px) 24px 80px;
+    position:relative;
+    z-index:1;
+  }
+
+  /* --- prompt line above name --- */
+  .prompt{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-dim);
+    letter-spacing:0.02em;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .prompt .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 8px var(--accent);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; }
+    50%{ opacity:0.35; }
+  }
+
+  /* --- SIGNATURE ELEMENT: name with glitch/decode hover --- */
+  h1.name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(2.6rem, 9vw, 4.6rem);
+    font-weight:800;
+    letter-spacing:-0.01em;
+    line-height:1;
+    cursor:default;
+    position:relative;
+    display:inline-block;
+    color:var(--text);
+    user-select:none;
+  }
+  h1.name .char{
+    display:inline-block;
+    transition:color .15s ease;
+  }
+  h1.name:hover .char{
+    color:var(--accent);
+  }
+  h1.name::after{
+    content:'';
+    position:absolute;
+    left:2px; right:2px; bottom:-6px;
+    height:2px;
+    background:var(--accent);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .4s cubic-bezier(.65,0,.35,1);
+  }
+  h1.name:hover::after{
+    transform:scaleX(1);
+  }
+  .name-caret{
+    display:inline-block;
+    width:0.5ch;
+    background:var(--accent);
+    margin-left:4px;
+    animation:blink 1.1s step-end infinite;
+  }
+  @keyframes blink{
+    0%,49%{ opacity:1; }
+    50%,100%{ opacity:0; }
+  }
+
+  .tagline{
+    font-size:15px;
+    color:var(--text-dim);
+    margin-top:18px;
+    max-width:46ch;
+    line-height:1.6;
+  }
+
+  /* section labels */
+  .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    color:var(--text-dim);
+    margin:64px 0 20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .label::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+
+  /* project cards */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  @media (max-width:560px){
+    .grid{ grid-template-columns:1fr; }
+  }
+
+  .card{
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:22px 20px;
+    position:relative;
+    overflow:hidden;
+    transition:border-color .25s ease, transform .25s ease;
+    cursor:pointer;
+    display:block;
+    text-decoration:none;
+  }
+  .card::before{
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:2px; height:0;
+    background:var(--accent);
+    transition:height .3s ease;
+  }
+  .card:hover{
+    border-color:#3a3a3a;
+    transform:translateY(-2px);
+  }
+  .card:hover::before{
+    height:100%;
+  }
+  .card h3{
+    font-family:'JetBrains Mono', monospace;
+    font-size:15px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .card h3 .arrow{
+    color:var(--accent);
+    opacity:0;
+    transform:translateX(-4px);
+    transition:all .25s ease;
+    font-size:13px;
+  }
+  .card:hover h3 .arrow{
+    opacity:1;
+    transform:translateX(0);
+  }
+  .card p{
+    font-size:13px;
+    color:var(--text-dim);
+    line-height:1.55;
+  }
+
+  /* connect links */
+  .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .links a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text);
+    text-decoration:none;
+    padding:10px 18px;
+    border:1px solid var(--border);
+    border-radius:4px;
+    position:relative;
+    transition:all .2s ease;
+  }
+  .links a::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:var(--accent);
+    border-radius:4px;
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .25s ease;
+    z-index:-1;
+  }
+  .links a:hover{
+    color:#0a0a0a;
+    border-color:var(--accent);
+  }
+  .links a:hover::before{
+    transform:scaleX(1);
+  }
+
+  footer{
+    margin-top:70px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:#4a4a4a;
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid var(--border);
+    padding-top:20px;
+  }
+
+  #clock{ color:var(--text-dim); }
+</style>
 </head>
 <body>
-    <h1>YMSOLORANKER</h1>
-    <p class="tagline">Building local AI tools, open-source systems, and the future.</p>
 
-    <div class="section-title">Projects</div>
-    <div class="projects">
-        <div class="project-card">
-            <h3>OpenBase</h3>
-            <p>A local, open-source alternative to Notion.</p>
-        </div>
-        <div class="project-card">
-            <h3>Solo IDE</h3>
-            <p>An AI-powered local development environment.</p>
-        </div>
-        <div class="project-card">
-            <h3>Claude-Toolkit</h3>
-            <p>Custom skills and prompts for AI agents.</p>
-        </div>
-    </div>
+<div class="wrap">
 
-    <div class="section-title">Connect</div>
-    <div class="links">
-        <a href="https://github.com/ymsoloranker">GitHub</a>
-        <a href="https://www.instagram.com/ymsoloranker">Instagram</a>
-        <a href="#">Contra</a>
-    </div>
+  <div class="prompt"><span class="dot"></span> whoami<span style="color:var(--text)"> → hamza</span></div>
+
+  <h1 class="name" id="nameEl">YMSOLORANKER<span class="name-caret">&nbsp;</span></h1>
+
+  <p class="tagline">Building local AI tools, open-source systems, and the future. Solo builder — everything runs on my own machine, nothing rented.</p>
+
+  <div class="label">projects</div>
+  <div class="grid">
+    <a class="card" href="https://github.com/ymsoloranker/SOLO-IDE" target="_blank">
+      <h3>Solo IDE <span class="arrow">→</span></h3>
+      <p>Why pay big techs for your code? AI-powered local dev environment.</p>
+    </a>
+    <a class="card" href="https://github.com/ymsoloranker/CLAUDE-TOOLKIT" target="_blank">
+      <h3>Claude-Toolkit <span class="arrow">→</span></h3>
+      <p>Be the power user. Custom skills and prompts for AI agents.</p>
+    </a>
+    <a class="card" href="https://github.com/ymsoloranker/SIMPLE-JARVIS-by-python-and-speech-recognition-" target="_blank">
+      <h3>Jarvis <span class="arrow">→</span></h3>
+      <p>Python voice assistant built with speech recognition and pyttsx3.</p>
+    </a>
+    <a class="card" href="https://github.com/ymsoloranker" target="_blank">
+      <h3>More on GitHub <span class="arrow">→</span></h3>
+      <p>Full repo list, including this site's source.</p>
+    </a>
+  </div>
+
+  <div class="label">connect</div>
+  <div class="links">
+    <a href="https://github.com/ymsoloranker" target="_blank">GitHub</a>
+    <a href="https://www.instagram.com/ymsoloranker/" target="_blank">Instagram</a>
+    <a href="https://contra.com/ymhamza_9v0fsymi/work?r=ymhamza_9v0fsymi" target="_blank">Contra</a>
+  </div>
+
+  <footer>
+    <span>Dhaka, BD</span>
+    <span id="clock">--:--</span>
+  </footer>
+
+</div>
+
+<script>
+  // split name into spans for per-char hover shimmer
+  const nameEl = document.getElementById('nameEl');
+  const raw = "YMSOLORANKER";
+  const caret = nameEl.querySelector('.name-caret');
+  nameEl.innerHTML = raw.split('').map(c => `<span class="char">${c}</span>`).join('');
+  nameEl.appendChild(caret);
+
+  const chars = nameEl.querySelectorAll('.char');
+  const glitchSet = "!<>-_\\/[]{}—=+*^?#";
+
+  nameEl.addEventListener('mouseenter', () => {
+    chars.forEach((el, i) => {
+      const original = el.textContent;
+      let iterations = 0;
+      const maxIter = 6 + i % 4;
+      const interval = setInterval(() => {
+        if(iterations >= maxIter){
+          el.textContent = original;
+          clearInterval(interval);
+          return;
+        }
+        el.textContent = glitchSet[Math.floor(Math.random()*glitchSet.length)];
+        iterations++;
+      }, 28);
+    });
+  });
+
+  // live clock, local timezone
+  function tick(){
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('clock').textContent = `${h}:${m}`;
+  }
+  tick();
+  setInterval(tick, 1000*15);
+</script>
+
 </body>
 </html>
