@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>my story — ymsoloranker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500&display=swap');
+ 
+  :root{
+    --bg: #0a0a0a;
+    --bg-raised: #111111;
+    --border: #262626;
+    --text: #e8e8e8;
+    --text-dim: #7a7a7a;
+    --accent: #ff3b3b;
+    --accent-blue: #4dc8ff;
+  }
+ 
+  *{ margin:0; padding:0; box-sizing:border-box; }
+ 
+  body{
+    background:var(--bg) url('nagi-bg.jpg') center 20% / cover fixed no-repeat;
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+ 
+  body::after{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:rgba(8,8,10,0.86);
+    pointer-events:none;
+    z-index:0;
+  }
+ 
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index:1;
+  }
+ 
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:min(12vh,100px) 24px 100px;
+    position:relative;
+    z-index:2;
+  }
+ 
+  .back{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-dim);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:color .2s ease;
+  }
+  .back:hover{ color:var(--accent-blue); }
+ 
+  .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    color:var(--text-dim);
+    margin:40px 0 20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .label::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+ 
+  h1{
+    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(2.2rem, 7vw, 3.4rem);
+    font-weight:800;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+    margin-top:14px;
+    position:relative;
+    display:inline-block;
+  }
+  h1 .char{ display:inline-block; transition:color .15s ease; }
+  h1:hover .char{ color:var(--accent-blue); }
+  h1::after{
+    content:'';
+    position:absolute;
+    left:2px; right:2px; bottom:-6px;
+    height:2px;
+    background:var(--accent-blue);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .4s cubic-bezier(.65,0,.35,1);
+  }
+  h1:hover::after{ transform:scaleX(1); }
+ 
+  .bio{
+    margin-top:44px;
+    font-size:17px;
+    line-height:1.85;
+    color:var(--text);
+  }
+  .bio p{ margin-bottom:22px; }
+  .bio p:last-of-type{ margin-bottom:0; }
+ 
+  .bio .emph{
+    color:var(--accent-blue);
+    font-weight:500;
+  }
+ 
+  .sign{
+    margin-top:56px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-dim);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .sign .dash{
+    color:var(--accent);
+  }
+  .sign .caret{
+    display:inline-block;
+    width:8px; height:14px;
+    background:var(--accent-blue);
+    animation:blink 1.1s step-end infinite;
+  }
+  @keyframes blink{
+    0%,49%{ opacity:1; }
+    50%,100%{ opacity:0; }
+  }
+ 
+  footer{
+    margin-top:80px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:#4a4a4a;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:18px;
+    justify-content:space-between;
+    border-top:1px solid var(--border);
+    padding-top:20px;
+  }
+ 
+  footer a{
+    color:#4a4a4a;
+    text-decoration:none;
+    transition:color .2s ease;
+  }
+  footer a:hover{ color:var(--accent-blue); }
+</style>
+</head>
+<body>
+ 
+<div class="wrap">
+ 
+  <a class="back" href="index.html">&larr; back</a>
+ 
+  <div class="label">my story</div>
+ 
+  <h1 id="nameEl">HAMZA</h1>
+ 
+  <div class="bio">
+    <p>I started coding in 2025.</p>
+    <p>I didn't start in a classroom. I started because I was broke and tired of looking at subscription pages I couldn't afford. So I learned how to build my own tools.</p>
+    <p>I don't use AI to replace thinking. I use AI to <span class="emph">accelerate execution</span>. I build local systems that run on your hardware, not on someone else's cloud.</p>
+    <p>I am Hamza. 15.</p>
+    <p>I build because I have no other choice. That's the only kind of building that lasts.</p>
+  </div>
+ 
+  <div class="sign"><span class="dash">—</span> ymsoloranker <span class="caret"></span></div>
+ 
+  <footer>
+    <span>Dhaka, BD</span>
+    <a href="index.html">index</a>
+  </footer>
+ 
+</div>
+ 
+<script>
+  const nameEl = document.getElementById('nameEl');
+  const raw = "HAMZA";
+  nameEl.innerHTML = raw.split('').map(c => `<span class="char">${c}</span>`).join('');
+ 
+  const chars = nameEl.querySelectorAll('.char');
+  const glitchSet = "!<>-_\\/[]{}—=+*^?#";
+ 
+  nameEl.addEventListener('mouseenter', () => {
+    chars.forEach((el, i) => {
+      const original = el.textContent;
+      let iterations = 0;
+      const maxIter = 6 + i % 4;
+      const interval = setInterval(() => {
+        if(iterations >= maxIter){
+          el.textContent = original;
+          clearInterval(interval);
+          return;
+        }
+        el.textContent = glitchSet[Math.floor(Math.random()*glitchSet.length)];
+        iterations++;
+      }, 28);
+    });
+  });
+</script>
+ 
+</body>
+</html>
+ 
