@@ -60,7 +60,7 @@
   .wrap{
     max-width:760px;
     margin:0 auto;
-    padding:min(14vh,120px) 24px 80px;
+    padding:min(14vh,120px) 24px 140px;
     position:relative;
     z-index:2;
   }
@@ -279,6 +279,66 @@
   }
 
   #clock{ color:var(--text-dim); }
+
+  /* --- floating mac-style dock --- */
+  .dock{
+    position:fixed;
+    bottom:22px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:10px;
+    padding:10px 14px;
+    background:rgba(17,17,17,0.65);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--border);
+    border-radius:20px;
+    z-index:50;
+  }
+  .dock a{
+    width:44px; height:44px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text-dim);
+    text-decoration:none;
+    position:relative;
+    transition:transform .2s cubic-bezier(.34,1.56,.64,1), color .2s ease, background .2s ease;
+  }
+  .dock a svg{
+    width:20px; height:20px;
+    stroke:currentColor;
+    fill:none;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .dock a:hover{
+    transform:translateY(-8px) scale(1.12);
+    color:var(--accent);
+    background:rgba(255,255,255,0.04);
+  }
+  .dock a.active{ color:var(--accent); }
+  .dock .tooltip{
+    position:absolute;
+    top:-32px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--text);
+    background:rgba(10,10,10,0.92);
+    border:1px solid var(--border);
+    padding:4px 9px;
+    border-radius:6px;
+    white-space:nowrap;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease;
+  }
+  .dock a:hover .tooltip{ opacity:1; }
 </style>
 </head>
 <body>
@@ -322,14 +382,25 @@
 
   <footer>
     <span>Dhaka, BD</span>
-    <div class="footer-links">
-      <a href="journey.html" style="color:var(--text-dim); text-decoration:none;">journey</a>
-      <a href="about.html" style="color:var(--text-dim); text-decoration:none;">my story</a>
-      <span id="clock">--:--</span>
-    </div>
+    <span id="clock">--:--</span>
   </footer>
 
 </div>
+
+<nav class="dock">
+  <a href="index.html" class="active">
+    <span class="tooltip">home</span>
+    <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+  </a>
+  <a href="journey.html">
+    <span class="tooltip">journey</span>
+    <svg viewBox="0 0 24 24"><path d="M4 18l1.5 3h13L20 18"/><path d="M6 18V10h12v8"/><path d="M12 10V4"/><path d="M12 4l5 6h-5"/></svg>
+  </a>
+  <a href="about.html">
+    <span class="tooltip">my story</span>
+    <svg viewBox="0 0 24 24"><path d="M4 5c2-1 5-1 8 1 3-2 6-2 8-1v13c-2-1-5-1-8 1-3-2-6-2-8-1V5z"/><path d="M12 6v13"/></svg>
+  </a>
+</nav>
 
 <script>
   // split name into spans for per-char hover shimmer
